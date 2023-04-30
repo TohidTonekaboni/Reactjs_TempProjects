@@ -5,26 +5,22 @@ import { useRef, useState } from "react";
 
 const Intro = () => {
   const [playVideo, setPlayVideo] = useState(false);
-  const vidRef = useRef();
+  const vidRef = useRef<HTMLVideoElement>(null);
   return (
     <div className="app__video">
-      <video
-        ref={vidRef}
-        src={meal}
-        type="video/mp4"
-        loop
-        controls={false}
-        muted
-      />
+      <video ref={vidRef} loop controls={false} muted>
+        <source src={meal} type="video/mp4" />
+      </video>
+
       <div className="app__video-overlay flex__center">
         <div
           className="app__video-overlay_circle flex__center"
           onClick={() => {
             setPlayVideo(!playVideo);
             if (playVideo) {
-              vidRef.current.pause();
+              vidRef.current?.pause();
             } else {
-              vidRef.current.play();
+              vidRef.current?.play();
             }
           }}
         >
